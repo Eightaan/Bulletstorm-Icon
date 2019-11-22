@@ -1,4 +1,3 @@
-
     local init_original = HUDTeammate.init
  
     function HUDTeammate:init(...)
@@ -11,8 +10,8 @@
 	function HUDTeammate:inject_ammo_glow()
 		self._primary_ammo = self._player_panel:child("weapons_panel"):child("primary_weapon_panel"):bitmap({
 			align           = "center",
-			w 				= 64,
-			h 				= 64,
+			w 				= 50,
+			h 				= 45,
 			name 			= "primary_ammo",
 			visible 		= false,
 			texture 		= "guis/textures/pd2/crimenet_marker_glow",
@@ -22,8 +21,8 @@
 		})
 		self._secondary_ammo = self._player_panel:child("weapons_panel"):child("secondary_weapon_panel"):bitmap({
 			align           = "center",
-			w 				= 64,
-			h 				= 64,
+			w 				= 50,
+			h 				= 45,
 			name 			= "secondary_ammo",
 			visible 		= false,
 			texture 		= "guis/textures/pd2/crimenet_marker_glow",
@@ -36,9 +35,10 @@
         self._primary_ammo:set_center_x(self._player_panel:child("weapons_panel"):child("primary_weapon_panel"):child("ammo_clip"):x() + self._player_panel:child("weapons_panel"):child("primary_weapon_panel"):child("ammo_clip"):w() / 2)
 		self._secondary_ammo:set_center_x(self._player_panel:child("weapons_panel"):child("secondary_weapon_panel"):child("ammo_clip"):x() + self._player_panel:child("weapons_panel"):child("secondary_weapon_panel"):child("ammo_clip"):w() / 2)
 	end
- 
-	
-	Hooks:PostHook( HUDTeammate , "set_ammo_amount_by_type" , "infinite_ammo" , function( self , type )
+
+	function HUDTeammate:set_ammo_amount_by_type(type, ...)
+	set_ammo_amount_by_type_original(self, type, ...)
+
 
 	local weapon_panel = self._player_panel:child( "weapons_panel" ):child( type .. "_weapon_panel" )
 	local ammo_clip = weapon_panel:child( "ammo_clip" )
@@ -51,7 +51,7 @@
 		ammo_clip:set_rotation( 0 )
 	end
 
-    end )
+    end 
 
     function HUDTeammate:_set_bulletstorm( state )
 
