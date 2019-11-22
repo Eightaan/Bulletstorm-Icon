@@ -1,4 +1,5 @@
     local init_original = HUDTeammate.init
+    local set_ammo_amount_by_type_original = HUDTeammate.set_ammo_amount_by_type
  
     function HUDTeammate:init(...)
         init_original(self, ...)
