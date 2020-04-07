@@ -1,11 +1,11 @@
 {
 	"name" : "Bulletstorm indicator",
 	"description" : "Brings back the infinite ammo indicator from hoxhud.",
-	"author" : "Eightan, Undeadsewer",
-	"version" : "1",
+	"author" : "Eightan",
+	"version" : "2.1",
 	"blt_version" : 2,
 	"color" : "0.15 0.15 0.15",
-	"image" : "_icon.png",
+	"image" : "icon.png",
 	"hooks" : [
 		{
 			"hook_id" : "lib/managers/hud/hudteammate",
