@@ -1,11 +1,4 @@
-if ArmStatic 
-or restoration and restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") 
-or PDTHHud and PDTHHud.Options:GetValue("HUD/MainHud") 
-or SydneyHUD and SydneyHUD:GetOption("improved_ammo_count") 
-or NepgearsyHUDReborn
-or WolfHUD and WolfHUD:getSetting({"CustomHUD", "ENABLED"}, true)
-or Holo
-then return end
+ if WolfHUD and WolfHUD:getSetting({"CustomHUD", "ENABLED"}, true) then return end
 
 local add_to_temporary_property_original = PlayerManager.add_to_temporary_property
 
