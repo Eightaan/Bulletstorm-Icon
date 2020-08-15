@@ -6,7 +6,7 @@ function PlayerManager:_clbk_bulletstorm_expire()
 	self._bullet_storm_clbk = nil
 	managers.hud:set_bulletstorm( false )
 	
-	if not BL2Options and managers.player and managers.player:player_unit() and managers.player:player_unit():inventory() then
+	if managers.player and managers.player:player_unit() and managers.player:player_unit():inventory() then
 		for id , weapon in pairs( managers.player:player_unit():inventory():available_selections() ) do
 			managers.hud:set_ammo_amount( id , weapon.unit:base():ammo_info() )
 		end
@@ -16,7 +16,7 @@ end
 function PlayerManager:add_to_temporary_property(name, time, value, ...)
    add_to_temporary_property_original(self, name, time, value, ...)
 
-	if not BL2Options and name == "bullet_storm" and time then
+	if name == "bullet_storm" and time then
 	
 		if not self._bullet_storm_clbk then
 			self._bullet_storm_clbk = "infinite"
