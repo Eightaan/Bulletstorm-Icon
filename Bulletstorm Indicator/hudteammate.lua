@@ -1,13 +1,13 @@
 local init_original = HUDTeammate.init
 local set_ammo_amount_by_type_original = HUDTeammate.set_ammo_amount_by_type
- 
+
 function HUDTeammate:init(...)
     init_original(self, ...)
 	if self._main_player then
 	    self:inject_ammo_glow()
 	end
 end
-	
+
 function HUDTeammate:inject_ammo_glow()
 	self._primary_ammo = self._player_panel:child("weapons_panel"):child("primary_weapon_panel"):bitmap({
 		align           = "center",
@@ -54,22 +54,22 @@ end
 
 function HUDTeammate:_set_bulletstorm( state )
 	self._bullet_storm = state	
-	
+
     if state then   	   
 		local pweapon_panel = self._player_panel:child( "weapons_panel" ):child( "primary_weapon_panel" )
 		local pammo_clip = pweapon_panel:child( "ammo_clip" )
 		local sweapon_panel = self._player_panel:child( "weapons_panel" ):child( "secondary_weapon_panel" )
 		local sammo_clip = sweapon_panel:child( "ammo_clip" )
-		
+
 		self._primary_ammo:set_visible(true)
 		self._secondary_ammo:set_visible(true)
 		self._secondary_ammo:animate( callback( self, self, "_animate_glow" ) )
 		self._primary_ammo:animate( callback( self , self , "_animate_glow" ) )
-		
+
 		pammo_clip:set_color(Color.white)
 		pammo_clip:set_text( "8" )
 		pammo_clip:set_rotation( 90 )
-		
+
 		sammo_clip:set_color(Color.white)
 		sammo_clip:set_text( "8" )
 		sammo_clip:set_rotation( 90 )	
@@ -78,11 +78,11 @@ function HUDTeammate:_set_bulletstorm( state )
 		self._secondary_ammo:set_visible(false)		
 	end
 end
-	
+
 function HUDTeammate:_animate_glow( glow )	
 	local t = 0	
 	while true do
 		t = t + coroutine.yield()
-		glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )	
+		glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )
 	end
 end
