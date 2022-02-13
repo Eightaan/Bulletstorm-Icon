@@ -53,7 +53,8 @@ function HUDTeammate:set_ammo_amount_by_type(type, ...)
 end 
 
 function HUDTeammate:_set_bulletstorm( state )
-	self._bullet_storm = state	
+	self._bullet_storm = state
+	if not self._primary_ammo then return end
 
     if state then   	   
 		local pweapon_panel = self._player_panel:child( "weapons_panel" ):child( "primary_weapon_panel" )
