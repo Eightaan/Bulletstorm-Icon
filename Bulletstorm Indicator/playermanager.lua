@@ -1,4 +1,4 @@
-if ArmStatic or restoration and restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") or PDTHHud and PDTHHud.Options:GetValue("HUD/MainHud") or WolfHUD and WolfHUD:getSetting({"CustomHUD", "ENABLED"}, true) then return end
+if VHUDPlus or WolfHUD and WolfHUD:getSetting({"CustomHUD", "ENABLED"}, true) then return end
 
 local add_to_temporary_property_original = PlayerManager.add_to_temporary_property
 
