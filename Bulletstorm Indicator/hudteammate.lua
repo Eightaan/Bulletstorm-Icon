@@ -1,3 +1,5 @@
+if VHUDPlus or WolfHUD and WolfHUD:getSetting({"CustomHUD", "ENABLED"}, true) then return end
+
 local init_original = HUDTeammate.init
 local set_ammo_amount_by_type_original = HUDTeammate.set_ammo_amount_by_type
 
@@ -54,9 +56,11 @@ end
 
 function HUDTeammate:_set_bulletstorm( state )
 	self._bullet_storm = state
+ 
 	if not self._primary_ammo then return end
 
-    if state then   	   
+    if self._bullet_storm then
+	    local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
 		local pweapon_panel = self._player_panel:child( "weapons_panel" ):child( "primary_weapon_panel" )
 		local pammo_clip = pweapon_panel:child( "ammo_clip" )
 		local sweapon_panel = self._player_panel:child( "weapons_panel" ):child( "secondary_weapon_panel" )
@@ -64,8 +68,8 @@ function HUDTeammate:_set_bulletstorm( state )
 
 		self._primary_ammo:set_visible(true)
 		self._secondary_ammo:set_visible(true)
-		self._secondary_ammo:animate( callback( self, self, "_animate_glow" ) )
-		self._primary_ammo:animate( callback( self , self , "_animate_glow" ) )
+		self._primary_ammo:animate(hudinfo.flash_icon, 4000000000)
+		self._secondary_ammo:animate(hudinfo.flash_icon, 4000000000)
 
 		pammo_clip:set_color(Color.white)
 		pammo_clip:set_text( "8" )
@@ -80,19 +84,12 @@ function HUDTeammate:_set_bulletstorm( state )
 	end
 end
 
-function HUDTeammate:_animate_glow( glow )	
-	local t = 0	
-	while true do
-		t = t + coroutine.yield()
-		glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )
-	end
-end
-
 local set_custom_radial_orig = HUDTeammate.set_custom_radial
 function HUDTeammate:set_custom_radial(data)
 	set_custom_radial_orig(self, data)
     local duration = data.current / data.total
-    if duration > 0 then
+	local aced = managers.player:upgrade_level("player", "berserker_no_ammo_cost", 0) == 1
+    if aced and duration > 0 then
         managers.hud:set_bulletstorm(true)
     else
         managers.hud:set_bulletstorm(false)
