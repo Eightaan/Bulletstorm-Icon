@@ -87,3 +87,14 @@ function HUDTeammate:_animate_glow( glow )
 		glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )
 	end
 end
+
+local set_custom_radial_orig = HUDTeammate.set_custom_radial
+function HUDTeammate:set_custom_radial(data)
+	set_custom_radial_orig(self, data)
+    local duration = data.current / data.total
+    if duration > 0 then
+        managers.hud:set_bulletstorm(true)
+    else
+        managers.hud:set_bulletstorm(false)
+    end
+end
