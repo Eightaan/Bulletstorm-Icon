@@ -2,7 +2,7 @@
 	"name" : "Bulletstorm indicator",
 	"description" : "Brings back the infinite ammo indicator from hoxhud.",
 	"author" : "Eightan",
-	"version" : "2.1.4",
+	"version" : "2.1.5",
 	"blt_version" : 2,
 	"color" : "0.15 0.15 0.15",
 	"image" : "icon.png",
@@ -18,6 +18,18 @@
 		{
 			"hook_id" : "lib/managers/playermanager",
 			"script_path" : "playermanager.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hudmanagerpd2",
+			"script_path" : "Compatibility/MUI.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hud/hudteammate",
+			"script_path" : "Compatibility/MUI.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hud/hudteammate",
+			"script_path" : "Compatibility/VoidUI.lua"
 		}
 	]
 }
