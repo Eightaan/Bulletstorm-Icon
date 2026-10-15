@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<mod
+    name = "Bulletstorm indicator"
+    description = "Brings back the infinite ammo indicator from hoxhud."
+	author = "Eightan"
+	version = "2.1.7"
+	blt_version = "2"
+	color = "0.15 0.15 0.15"
+	image = "icon.png"
+>
+    <update
+        provider = "mws"
+        identifier = "24829"
+        patchnotes = "https://modworkshop.net/mod/24829?tab=changelog"
+    />
+    <hooks script_path="Compatibility/">
+        <group hook_id="lib/managers/">
+            <group :hook_id="playermanager">
+                <post script_path="playermanager.lua" />
+            </group>
+			<group :hook_id="hudmanagerpd2">
+                <post script_path="hudmanagerpd2.lua" />
+                <post :script_path="MUI.lua" />
+				<post :script_path="Holo.lua" />
+            </group>
+            <group :hook_id="hud/hudteammate">
+                <post script_path="hudteammate.lua" />
+                <post :script_path="MUI.lua" />
+				<post :script_path="Holo.lua" />
+				<post :script_path="VoidUI.lua" />
+            </group>
+        </group>
+    </hooks>
+</mod>

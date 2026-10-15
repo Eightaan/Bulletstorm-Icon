@@ -54,32 +54,42 @@ function HUDTeammate:set_ammo_amount_by_type(type, ...)
 	end
 end 
 
-function HUDTeammate:_set_bulletstorm( state )
+function HUDTeammate:_set_bulletstorm(state)
+	if self._bullet_storm == state then
+		return
+	end
 	self._bullet_storm = state
- 
-	if not self._primary_ammo then return end
 
-    if self._bullet_storm then
-	    local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
-		local pweapon_panel = self._player_panel:child( "weapons_panel" ):child( "primary_weapon_panel" )
-		local pammo_clip = pweapon_panel:child( "ammo_clip" )
-		local sweapon_panel = self._player_panel:child( "weapons_panel" ):child( "secondary_weapon_panel" )
-		local sammo_clip = sweapon_panel:child( "ammo_clip" )
+	if not self._primary_ammo then 
+		return 
+	end
+
+	local pammo_clip = self._player_panel:child("weapons_panel"):child("primary_weapon_panel"):child("ammo_clip")
+	local sammo_clip = self._player_panel:child("weapons_panel"):child("secondary_weapon_panel"):child("ammo_clip")
+
+	if state then
+		local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
+
+		self._primary_ammo:stop()
+		self._secondary_ammo:stop()
 
 		self._primary_ammo:set_visible(true)
 		self._secondary_ammo:set_visible(true)
+
 		self._primary_ammo:animate(hudinfo.flash_icon, 4000000000)
 		self._secondary_ammo:animate(hudinfo.flash_icon, 4000000000)
 
 		pammo_clip:set_color(Color.white)
-		pammo_clip:set_text( "8" )
-		pammo_clip:set_rotation( 90 )
+		pammo_clip:set_text("8")
+		pammo_clip:set_rotation(90)
 
 		sammo_clip:set_color(Color.white)
-		sammo_clip:set_text( "8" )
-		sammo_clip:set_rotation( 90 )	
-    else
-        self._primary_ammo:set_visible(false)
+		sammo_clip:set_text("8")
+		sammo_clip:set_rotation(90)	
+	else
+		self._primary_ammo:stop()
+		self._secondary_ammo:stop()
+		self._primary_ammo:set_visible(false)
 		self._secondary_ammo:set_visible(false)		
 	end
 end
